@@ -1,0 +1,41 @@
+<form [formGroup]="recipeForm" (ngSubmit)="onSubmit()" class="form-wrapper">
+
+  <!-- Recipe Title -->
+  <label>Recipe Title</label>
+  <input type="text" formControlName="title" placeholder="e.g. Chocolate Cake" />
+
+  <hr />
+
+  <!-- Ingredients -->
+  <h3>Ingredients</h3>
+  <div formArrayName="ingredients">
+    <div *ngFor="let ingredient of ingredients.controls; let i = index" [formGroupName]="i" class="ingredient-row">
+      <input formControlName="name" placeholder="Ingredient name" />
+      <button type="button" (click)="removeIngredient(i)">Remove</button>
+
+      <!-- Nutrition Display -->
+      <div class="nutrition" *ngIf="ingredient.value.nutrition">
+        <span>Carbs: {{ ingredient.value.nutrition.carbs }}</span>
+        <span>Fat: {{ ingredient.value.nutrition.fat }}</span>
+        <span>Protein: {{ ingredient.value.nutrition.protein }}</span>
+      </div>
+    </div>
+    <button type="button" (click)="addIngredient()">Add Ingredient</button>
+  </div>
+
+  <hr />
+
+  <!-- Steps -->
+  <h3>Steps</h3>
+  <div formArrayName="steps">
+    <div *ngFor="let step of steps.controls; let j = index" [formGroupName]="j" class="step-row">
+      <textarea formControlName="description" rows="2" placeholder="Step {{ j + 1 }}"></textarea>
+      <button type="button" (click)="removeStep(j)">Remove</button>
+    </div>
+    <button type="button" (click)="addStep()">Add Step</button>
+  </div>
+
+  <hr />
+
+  <!-- Submit -->
+  <button type="submit" [disabled]="recipeForm.invalid">Save Recipe</button>

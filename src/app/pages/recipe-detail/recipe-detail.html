@@ -1,0 +1,25 @@
+<div *ngIf="recipe" class="detail-wrapper">
+  <button routerLink="/recipes">⬅️ Back</button>
+
+  <h2>{{ recipe.title }}</h2>
+
+  <h3>Ingredients</h3>
+  <ul>
+    <li *ngFor="let i of recipe.ingredients">
+      <strong>{{ i.name }}</strong>
+      <span *ngIf="i.nutrition !== 'Not Found' && typeof(i.nutrition) === 'object'">
+        — Carbs: {{ i.nutrition.carbs }},
+        Fat: {{ i.nutrition.fat }},
+        Protein: {{ i.nutrition.protein }}
+      </span>
+      <span *ngIf="i.nutrition === 'Not Found'"> — ⚠️ Nutrition not found</span>
+    </li>
+  </ul>
+
+  <h3>Steps</h3>
+  <ol>
+    <li *ngFor="let s of recipe.steps">{{ s.description }}</li>
+  </ol>
+</div>
+
+<div *ngIf="!recipe">Loading...</div>

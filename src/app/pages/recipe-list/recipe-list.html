@@ -1,0 +1,16 @@
+<div class="list-wrapper">
+  <h2>📋 Recipes</h2>
+
+  <button [routerLink]="['/recipes/new']">➕ New Recipe</button>
+
+  <div *ngIf="recipes.length === 0">No recipes yet.</div>
+
+  <ul>
+    <li *ngFor="let recipe of recipes">
+      <a [routerLink]="['/recipes', recipe.id]"><strong>{{ recipe.title }}</strong></a>
+      <div class="actions">
+        <button (click)="deleteRecipe(recipe.id!)">🗑️ Delete</button>
+      </div>
+    </li>
+  </ul>
+</div>

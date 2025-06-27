@@ -1,0 +1,11 @@
+<div class="recipe-home">
+  <div class="form-section">
+    <h2>Add Recipe</h2>
+    <app-recipe-form (recipeSaved)="onRecipeSaved()" />
+  </div>
+
+  <div class="list-section">
+    <h2>All Recipes</h2>
+    <app-recipe-list #recipeList />
+  </div>
+</div>
